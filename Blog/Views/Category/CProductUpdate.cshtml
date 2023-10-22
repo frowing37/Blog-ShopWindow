@@ -1,0 +1,77 @@
+﻿@{
+    Layout = "/Views/Shared/_LayoutvanGogh3.cshtml";
+}
+
+@model ProductCategoryDto
+
+<div class="container">
+    <div class="center-card">
+        <div class="card">
+            <div class="card-header">
+                Ürün Kategorisi Güncelle
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("CProductUpdate", "Category", FormMethod.Post))
+                {
+                    @Html.TextBoxFor(m => m.CategoryID, new { @class = "form-control", placeholder = "Post ID" })
+                    <br />
+                    @Html.TextBoxFor(m => m.CategoryName, new { @class = "form-control", placeholder = "Yeni Post Başlığı" })
+                    <br />
+                    <button style="margin-left:10px;">Güncelle</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        margin-top: 30px;
+        opacity: 0.95;
+    }
+
+    .center-card {
+        display: flex;
+        align-items: center;
+    }
+
+    .card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 800px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        background-color: #b6c213;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th,
+        .table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .table th {
+            background-color: #f0f0f0;
+        }
+</style>

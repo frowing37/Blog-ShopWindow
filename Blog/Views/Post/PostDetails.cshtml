@@ -1,0 +1,155 @@
+﻿@{
+    Layout = "/Views/Shared/_LayoutvanGogh2.cshtml";
+}
+
+@model PostDto
+
+<div class="container">
+    <div class="center-card">
+        <div class="card">
+            <div class="card-header">
+                Post Yorumları
+            </div>
+            <div class="card-body">
+                <div class="tweet-card">
+                    <div class="tweet-content">
+                        <h2>@Model.PostName</h2>
+                        <p>@Model.PostContent</p>
+                    </div>
+                </div>
+                <hr />
+                <h2>Yorumlar</h2>
+                @foreach (var comment in ViewBag.CommentsOfPost)
+                {
+                    <div class="tweet-card">
+                        <div class="tweet-content">
+                            <h2>@comment.CommentName</h2>
+                            <p>@comment.CommentContent</p>
+                        </div>
+                        <div class="tweet-actions">
+                            <a href="/Comment/LikeIt/@comment.CommentID" class="like-button">
+                                <img src="/Image/like-solid-24.png"></img>
+                                <label>@comment.CommentNumberofLike</label>
+                            </a>
+                        </div>
+                    </div>
+                }
+                <hr />
+
+                <h2>Yorum Ekle</h2>
+
+                <form asp-controller="Comment" asp-action="Insert" method="post">
+                    <div class="tweet-card">
+                        <div class="tweet-content">
+                            <input type="text" asp-for="CommentName" placeholder="Yorum Başlığı" />
+                            <br />
+                            <input type="text" asp-for="CommentContent" placeholder="Yorumunuz" />
+                        </div>
+                        <div class="tweet-actions">
+                            <button type="submit">Ekle</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        margin-top: 30px;
+        opacity: 0.95;
+    }
+
+    .center-card {
+        display: flex;
+        align-items: center;
+    }
+
+    .card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 800px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        background-color: #b6c213;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th,
+        .table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .table th {
+            background-color: #f0f0f0;
+        }
+
+    .alt-card {
+        background-color: ebd5b7;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 800px;
+        overflow: hidden;
+    }
+
+    .tweet-card {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .tweet-content {
+        margin-bottom: 10px;
+    }
+
+        .tweet-content p {
+            font-size: 16px;
+            margin: 0;
+        }
+
+    .tweet-actions {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .like-button,
+    .comment-button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+        text-align: center;
+        align-content: center;
+    }
+
+        .like-button:hover,
+        .comment-button:hover {
+            background-color: #0056b3;
+        }
+</style>

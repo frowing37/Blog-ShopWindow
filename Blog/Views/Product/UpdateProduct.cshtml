@@ -1,0 +1,131 @@
+﻿@{
+    Layout = "/Views/Shared/_LayoutvanGogh3.cshtml";
+}
+
+@model ProductDto
+
+<div class="container">
+    <div class="center-card">
+        <div class="card">
+            <div class="card-header">
+                Ürün Güncelle
+            </div>
+            @using (Html.BeginForm("UpdateProduct", "Product", FormMethod.Post))
+            {
+                @Html.TextBoxFor(m => m.ID, new { @class = "form-control" })
+                <br />
+                @Html.TextBoxFor(m => m.ProductName, new { @class = "form-control" })
+                <br />
+                @Html.TextBoxFor(m => m.ProductDetails, new { @class = "form-control" })
+                <br />
+                @Html.TextBoxFor(m => m.ProductPrice, new { @class = "form-control" })
+                <br />
+                @Html.TextBoxFor(m => m.NumberOfLike, new { @class = "form-control" })
+                <br />
+                @Html.DropDownListFor(m => m.CategoryID, (List<SelectListItem>)ViewBag.ProductCategories, new { @class = "form-control" })
+                <br />
+                <button style="margin-left:10px;">Güncelle</button>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        margin-top: 30px;
+        opacity: 0.95;
+    }
+
+    .center-card {
+        display: flex;
+        align-items: center;
+    }
+
+    .card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 800px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        background-color: #b6c213;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th,
+        .table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .table th {
+            background-color: #f0f0f0;
+        }
+
+    .alt-card {
+        background-color: ebd5b7;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 800px;
+        overflow: hidden;
+    }
+
+    .tweet-card {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .tweet-content {
+        margin-bottom: 10px;
+    }
+
+        .tweet-content p {
+            font-size: 16px;
+            margin: 0;
+        }
+
+    .tweet-actions {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .like-button,
+    .comment-button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+        text-align: center;
+        align-content: center;
+    }
+
+        .like-button:hover,
+        .comment-button:hover {
+            background-color: #0056b3;
+        }
+</style>
+

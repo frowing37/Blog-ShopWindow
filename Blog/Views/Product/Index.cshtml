@@ -1,0 +1,163 @@
+﻿@{
+    Layout = "/Views/Shared/_LayoutvanGogh2.cshtml";
+}
+
+@model List<Product>
+
+<div class="container">
+    <div class="center-card">
+        <div class="card">
+            <div class="card-header">
+                Ürünler
+            </div>
+            @foreach (var product in Model)
+            {
+                <div class="card-body">
+                    <div class="product-container">
+                        <div class="product-item">
+                            <img src=@product.ImageURL>
+                            <h3>@product.ProductName</h3>
+                            <p>Fiyat: $@product.ProductPrice</p>
+                            <p>Kategori : @product.CategoryProduct.CategoryName</p>
+                            <button style="margin-right:5px;"><a href="/Product/ProductDetails/@product.ProductID" style="text-decoration:none; color:white;">Detay</a></button>
+                            <a href="/Product/LikeIt/@product.ProductID" class="like-button">
+                                <img src="/Image/like-solid-24.png"></img>
+                                <label style="text-decoration:none">@product.NumberofLike</label>
+                            </a>
+                            <br />
+                            <button>Sepete Ekle</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .product-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .product-item {
+        width: 30%;
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+        .product-item img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .product-item h3 {
+            margin: 10px 0;
+        }
+
+        .product-item p {
+            color: #666;
+        }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        margin-top: 30px;
+        opacity: 0.95;
+    }
+
+    .center-card {
+        display: flex;
+        align-items: center;
+    }
+
+    .card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 800px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        background-color: #b6c213;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th,
+        .table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .table th {
+            background-color: #f0f0f0;
+        }
+
+    .alt-card {
+        background-color: ebd5b7;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 800px;
+        overflow: hidden;
+    }
+
+    .tweet-card {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .tweet-content {
+        margin-bottom: 10px;
+    }
+
+        .tweet-content p {
+            font-size: 16px;
+            margin: 0;
+        }
+
+    .tweet-actions {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .like-button,
+    .comment-button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+        text-align: center;
+        align-content: center;
+    }
+
+        .like-button:hover,
+        .comment-button:hover {
+            background-color: #0056b3;
+        }
+</style>

@@ -1,0 +1,165 @@
+﻿@{
+    Layout = null;
+}
+@model ConfirmMailDto
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <div id="my-form1">
+            <form class="my-form">
+                <div class="d-flex justify-content-center">
+                    <h2>Mail Doğrulama</h2>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <input type="text" id="input-mail" asp-for="Mail" disabled="disabled" />
+                </div>
+                <br />
+                <div class="d-flex justify-content-center">
+                    <label style="font-weight:bold">Mailinize gelen kodu girin</label>
+                </div>
+                <br />
+                <div>
+                    <input type="tel" class="input-code" min="0" max="9" maxlength="1" oninput="moveToNextInput(this)" />
+                    <input type="tel" class="input-code" min="0" max="9" maxlength="1" oninput="moveToNextInput(this)" />
+                    <input type="tel" class="input-code" min="0" max="9" maxlength="1" oninput="moveToNextInput(this)" />
+                    <input type="tel" class="input-code" min="0" max="9" maxlength="1" oninput="moveToNextInput(this)" />
+                    <input type="tel" class="input-code" min="0" max="9" maxlength="1" oninput="moveToNextInput(this)" />
+                    <input type="tel" class="input-code" min="0" max="9" maxlength="1" oninput="moveToNextInput(this)" />
+                </div>
+                <br />
+                <div class="d-flex justify-content-center">
+                    <button type="submit" value="Onayla">Onayla</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .input-code {
+        width: 50px;
+        height: 70px;
+        border: 2px solid #302af5;
+        color: #67668a;
+        border-radius: 4px;
+        font-size: 30px;
+        text-align: center;
+    }
+
+    #input-mail {
+        width: 200px;
+        height: 45px;
+        border: 2px solid #302af5;
+        color: #56566b;
+        border-radius: 4px;
+        text-align: center;
+    }
+
+    #my-form1 {
+        margin-top: 100px;
+        display: flex;
+        justify-content: space-around;
+        width: 380px;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    #logo-label {
+        height: 48px;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        margin-left: 60px;
+        margin-top: 6px;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url('/Image/yıldızlı-gece-van-gogh.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        //display: flex;
+        //justify-content: center;
+        //align-items: center;
+        //height: 100vh;
+        margin: 0;
+    }
+    button {
+        background-color: #4400FF;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin-top: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        button:hover {
+            background-color: #2200AA;
+        }
+</style>
+
+<script>
+
+    function moveToNextInput(input) {
+    var maxLength = parseInt(input.getAttribute("maxlength"));
+    var currentValue = input.value;
+
+    if (currentValue.length >= maxLength) {
+        var nextInput = input.nextElementSibling;
+
+        if (nextInput !== null && nextInput.classList.contains("input-code")) {
+            nextInput.focus();
+        }
+    }
+}
+
+
+    function generateConfirmationCode() {
+        var code = '';
+        var inputElements = document.getElementsByClassName('input-code');
+
+        for (var i = 0; i < inputElements.length; i++) {
+            code += inputElements[i].value;
+        }
+
+        return code;
+    }
+
+    document.querySelector('.my-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var confirmationCode = generateConfirmationCode();
+        var confirmationMail = document.getElementById("input-mail").value;
+
+        var ConfirmMailDto = {
+            Code: confirmationCode,
+            Mail: confirmationMail
+        };
+
+        var formData = new FormData();
+        formData.append('Code', ConfirmMailDto.Code);
+        formData.append('Mail', ConfirmMailDto.Mail);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Home/ConfirmMail', true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.redirectUrl) {
+                        window.location.href = response.redirectUrl;
+                    }
+                } else {
+                    
+                }
+            }
+        };
+        xhr.send(formData);
+    });
+    </script>

@@ -1,0 +1,77 @@
+﻿@{
+    Layout = "/Views/Shared/_LayoutvanGogh3.cshtml";
+}
+
+@model List<CategoryProduct>
+
+<div class="container">
+    <div class="center-card">
+        <div class="card">
+            <div class="card-header">
+                Ürün Kategorileri
+            </div>
+            <div class="card-body">
+                <table class="table table-hovered table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Kategori ID</th>
+                            <th>Kategori Adı</th>
+                            <th>Güncelle</th>
+                            <th>Sil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var category in Model)
+                        {
+                            <tr>
+                                <th>@category.CategoryId</th>
+                                <th>@category.CategoryName</th>
+                                <th><button style="background-color:forestgreen;"><a href="/Category/CProductUpdate/@category.CategoryId" style="text-decoration:none;color:white;">Güncelle</a></button></th>
+                                <th><button style="background-color:darkred;"><a href="/Category/CProductDelete/@category.CategoryId" style="text-decoration:none;color:white;">Sil</a></button></th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <br />
+                <form asp-controller="Category" asp-action="NewProductCategory" method="get">
+                    <button>Yeni Ürün Kategorisi</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        margin-top: 30px;
+        opacity: 0.95;
+    }
+
+    .center-card {
+        display: flex;
+        align-items: center;
+    }
+
+    .card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 800px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        background-color: #b6c213;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+</style>

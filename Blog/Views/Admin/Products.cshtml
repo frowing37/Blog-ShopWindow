@@ -1,0 +1,81 @@
+﻿@{
+    Layout = "/Views/Shared/_LayoutvanGogh3.cshtml";
+}
+
+@model List<Product>
+
+<div class="container">
+    <div class="center-card">
+        <div class="card">
+            <div class="card-header">
+                Ürünler
+            </div>
+            <div class="card-body">
+                <table class="table table-hovered table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Ürün ID</th>
+                            <th>Ürün Adı</th>
+                            <th>Ürün Beğeni Sayısı</th>
+                            <th>Ürün Kategorisi</th>
+                            <th>Güncelle</th>
+                            <th>Sil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in Model)
+                        {
+                            <tr>
+                                <th>@product.ProductID</th>
+                                <th>@product.ProductName</th>
+                                <th>@product.NumberofLike</th>
+                                <th>@product.CategoryProduct.CategoryName</th>
+                                <th><button style="background-color:forestgreen;"><a href="/Product/UpdateProduct/@product.ProductID" style="text-decoration:none;color:white;">Güncelle</a></button></th>
+                                <th><button style="background-color:darkred;"><a href="/Product/Delete/@product.ProductID" style="text-decoration:none;color:white;">Sil</a></button></th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <br />
+                <form asp-controller="Product" asp-action="NewProduct" method="get">
+                    <button>Yeni Ürün</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        margin-top: 30px;
+        opacity: 0.95;
+    }
+
+    .center-card {
+        display: flex;
+        align-items: center;
+    }
+
+    .card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 800px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        background-color: #b6c213;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+</style>

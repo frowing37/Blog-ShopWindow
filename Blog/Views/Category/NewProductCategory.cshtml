@@ -1,0 +1,74 @@
+﻿@{
+    Layout = "/Views/Shared/_LayoutvanGogh3.cshtml";
+}
+
+@model ProductCategoryDto
+
+<div class="container">
+    <div class="center-card">
+        <div class="card">
+            <div class="card-header">
+                Yeni Ürün Kategorisi
+            </div>
+            <div class="card-body">
+                <form asp-controller="Category" asp-action="NewProductCategory" method="post">
+                    <input type="text" asp-for="CategoryName" placeholder="Kategori Adı" />
+                    <br />
+                    <button type="submit">Ekle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        margin-top: 30px;
+        opacity: 0.95;
+    }
+
+    .center-card {
+        display: flex;
+        align-items: center;
+    }
+
+    .card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 800px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        background-color: #b6c213;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th,
+        .table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .table th {
+            background-color: #f0f0f0;
+        }
+</style>
