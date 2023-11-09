@@ -11,7 +11,6 @@ namespace Blog_Data.Concrete
         {
             optionsBuilder.UseSqlServer("Server=localhost,1433;Database=DBSiparisBlog;User Id=SA;Password=reallyStrongPwd123;TrustServerCertificate=True;Encrypt=false;");
         }
-
         public DbSet<Cart> carts { get; set; }
 
         public DbSet<CategoryPost> categoryPosts { get; set; }

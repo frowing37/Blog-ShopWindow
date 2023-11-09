@@ -129,7 +129,7 @@ public class HomeController : BaseController
             {
                 var adminControl = await _userManager.GetUsersInRoleAsync("Admin");
 
-                if (adminControl == null)
+                if (adminControl.Count == 0)
                 {
                     await _userManager.AddToRoleAsync(appUser, "Admin");
                 }
